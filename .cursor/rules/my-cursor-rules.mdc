@@ -1,0 +1,7 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+When writing code, always use React 18 functional components with strict TypeScript, TailwindCSS utilities only (no extra CSS files), shadcn-ui primitives, meaningful names, event handlers prefixed with “handle”, early-return pattern, and include basic a11y (aria-label, tabIndex). Commit messages must follow Conventional Commits (feat, fix, chore…).
+

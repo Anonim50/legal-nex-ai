@@ -1,8 +1,8 @@
-
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useLanguage } from "@/context/LanguageContext";
 import { Button } from "@/components/ui/button";
+import { Section } from "@/components/layout/Section";
 
 export const HeroSection = () => {
   const { t } = useLanguage();
@@ -30,8 +30,8 @@ export const HeroSection = () => {
   const ctaSecondary = t("cta.secondary") || "Request Demo";
 
   return (
-    <section className="relative overflow-hidden bg-gradient-to-b from-white to-neutral-50 pt-32 pb-16 md:pt-40 md:pb-24">
-      <div className="container-custom relative z-10">
+    <Section className="relative overflow-hidden pt-32 pb-16 md:pt-40 md:pb-24">
+      <div className="relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div className="text-center lg:text-left">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
@@ -41,18 +41,22 @@ export const HeroSection = () => {
               {heroSubtitle}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-              <Button 
-                size="lg" 
-                className="bg-primary hover:bg-primary/90 text-white text-lg px-8 py-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300" 
+              <Button
+                size="lg"
+                className="bg-primary hover:bg-primary/90 text-white text-lg px-8 py-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
                 onClick={handleTryFreeClick}
+                aria-label={ctaPrimary}
+                tabIndex={0}
               >
                 {ctaPrimary}
               </Button>
-              <Button 
-                variant="outline" 
-                size="lg" 
+              <Button
+                variant="outline"
+                size="lg"
                 className="border-2 border-primary text-primary hover:bg-primary/5 text-lg px-8 py-6 rounded-xl transition-colors"
                 onClick={handleRequestDemoClick}
+                aria-label={ctaSecondary}
+                tabIndex={0}
               >
                 {ctaSecondary}
               </Button>
@@ -60,9 +64,9 @@ export const HeroSection = () => {
           </div>
           <div className="relative mx-auto lg:mx-0 max-w-md">
             <div className="bg-white rounded-2xl shadow-2xl overflow-hidden transform hover:scale-[1.02] transition-transform duration-300">
-              <img 
-                src="https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?auto=format&fit=crop&w=600&q=80" 
-                alt="Legal AI Interface" 
+              <img
+                src="https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?auto=format&fit=crop&w=600&q=80"
+                alt="Legal AI Interface"
                 className="w-full h-auto object-cover hover:opacity-90 transition-opacity"
                 loading="lazy"
               />
@@ -73,6 +77,6 @@ export const HeroSection = () => {
         </div>
       </div>
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(0,85,255,0.05),transparent)] pointer-events-none"></div>
-    </section>
+    </Section>
   );
 };

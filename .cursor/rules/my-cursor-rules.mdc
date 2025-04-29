@@ -3,5 +3,108 @@ description:
 globs: 
 alwaysApply: true
 ---
-When writing code, always use React 18 functional components with strict TypeScript, TailwindCSS utilities only (no extra CSS files), shadcn-ui primitives, meaningful names, event handlers prefixed with “handle”, early-return pattern, and include basic a11y (aria-label, tabIndex). Commit messages must follow Conventional Commits (feat, fix, chore…).
+# You are an expert full-stack developer for Legal Nexus AI,
+# proficient in TypeScript, React, Next.js (App & Pages Router), TailwindCSS, Shadcn UI and Radix UI.
+# Your mission is to generate optimized, maintainable Next.js code
+# following clean-code principles and a robust architecture.
 
+# 1. File & Directory Structure
+paths:
+  - src/
+  - public/
+  - tests/
+  - components.json
+  - README.md
+
+# 2. Frontend React/Next.js Conventions
+rules:
+  - pattern: "^src/pages/.*\\.tsx$"
+    description: |
+      • Pages must NOT include container padding or layout classes—global layout handles styling.  
+      • Every page must render a Breadcrumbs component at the top.  
+      • Small, self-contained helper components live alongside page.tsx (no nested components/ folder).  
+      • Avoid too many local functions inside components—extract logic to src/models/ or src/utils/.
+
+  - pattern: "\\.tsx?$"
+    description: |
+      • Favor React Server Components; minimize 'use client', useEffect, and setState.  
+      • Handlers named handleXxx (e.g., handleClick, handleKeyDown).  
+      • Import via "@/…" aliases only; no deep relative imports.  
+      • Use clsx or template strings for conditional className.
+
+  - pattern: "^src/components/"
+    description: |
+      • Reusable UI atoms & wrappers live here (shadcn/ui, Radix).  
+      • Style exclusively with Tailwind utility classes.  
+      • Responsive, mobile-first layouts; use next/image for optimized WebP/AVIF with loading="lazy".
+
+# 3. Coding Style & Best Practices
+typescript:
+  avoid:
+    - any
+    - non-null assertions (!)
+  enforce:
+    - strict typing for all props & data models
+    - export all types from src/types/index.ts
+    - const function declarations: const fetchData = async () => { … }
+  imports:
+    - use "@/…" aliases exclusively
+
+ui_styling:
+  - Tailwind CSS JIT with purge enabled
+  - All interactive elements include aria-* attributes and keyboard support
+
+# 4. State Management & Data Fetching
+data_fetching:
+  - Use TanStack React Query for async calls
+  - Validate API responses with Zod schemas
+  - Global state (if required) via Zustand only
+
+# 5. Logging & Error Handling
+logging:
+  - Liberally use console.log, console.warn, console.error
+  - Include contextual metadata: userId, requestId, action
+error_handling:
+  - Use guard clauses and early returns
+  - Define custom Error classes (e.g., ContractValidationError)
+  - Surface user-friendly messages via toast/sonner
+
+# 6. Testing
+tests:
+  unit:
+    pattern: "^tests/unit/.*\\.(spec|test)\\.ts$"
+    framework: Vitest
+    description: |
+      • Cover hooks, utils, and individual components  
+      • Mirror src/ structure in tests/unit/
+  e2e:
+    pattern: "^tests/e2e/.*\\.(spec|test)\\.ts$"
+    framework: Playwright
+    description: |
+      • End-to-end flows: login → upload → view results  
+      • Keep tests resilient and reusable
+
+# 7. CI/CD
+ci:
+  pre_commit:
+    - pnpm lint
+    - pnpm typecheck
+  github_actions:
+    - name: Build & Test
+      steps:
+        - pnpm install
+        - pnpm lint
+        - pnpm run build
+        - pnpm test
+    - name: Deploy
+      steps:
+        - vercel --prod
+        - supabase functions deploy analyze-document --project-ref $SUPA_REF
+
+# 8. Git Workflow
+git:
+  branch_naming: "feature/<short-description>" or "bugfix/<short-description>"
+  commit_messages: "Conventional Commits: feat:, fix:, chore:"
+  pull_requests:
+    - one logical change per PR
+    - include what, why, and how to test

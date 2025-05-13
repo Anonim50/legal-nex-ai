@@ -1,32 +1,67 @@
-
-import meta from './meta.json';
-import navigation from './navigation.json';
-import hero from './hero.json';
-import features from './features.json';
-import pricing from './pricing.json';
-import footer from './footer.json';
-import form from './form.json';
-import cookies from './cookies.json';
-import testimonials from './testimonials.json';
-import personas from './personas.json';
-import faq from './faq.json';
-import advantages from './advantages.json';
-import security from './security.json';
-import cta from './cta.json';
-
 export default {
-  ...meta,
-  ...navigation,
-  ...hero,
-  ...features,
-  ...pricing,
-  ...footer,
-  ...form,
-  ...cookies,
-  ...testimonials,
-  ...personas,
-  ...faq,
-  ...advantages,
-  ...security,
-  ...cta
+  title: "ИИ-юрист для Узбекистана",
+  subtitle:
+    "Проанализируй договор за 30 секунд. Наш ИИ находит риски, переводит текст и даёт рекомендации — на русском, узбекском и английском языках.",
+  cta: {
+    primary: "Попробовать бесплатно",
+    secondary: "Запросить демо",
+  },
+  features: {
+    analysis: {
+      title: "Анализ договоров",
+      description:
+        "ИИ анализирует PDF и Word-файлы, выявляет потенциальные риски и спорные пункты.",
+    },
+    translation: {
+      title: "Мгновенный перевод",
+      description:
+        "Автоматический перевод договоров на узбекский, русский и английский языки.",
+    },
+    riskColoring: {
+      title: "Цветовая маркировка рисков",
+      description:
+        "Опасные условия выделяются красным цветом, средние — жёлтым, безопасные — зелёным.",
+    },
+    summaries: {
+      title: "Резюме и рекомендации",
+      description:
+        "ИИ формирует краткое резюме договора и предлагает юридически корректные действия.",
+    },
+    history: {
+      title: "История анализов",
+      description:
+        "Сохраняй договоры и возвращайся к ним в любое время. Работает через Telegram и Web.",
+    },
+  },
+  testimonials: {
+    title: "Отзывы",
+    user1: {
+      quote: "Раньше тратил часы на чтение договоров. Теперь за минуту вижу все риски.",
+      name: "Ахмаджон, ИП",
+    },
+    user2: {
+      quote: "Удобно! Даже без юриста понимаю, что подписываю.",
+      name: "Севара, маркетолог",
+    },
+  },
+  faq: {
+    title: "Часто задаваемые вопросы",
+    q1: {
+      question: "Какой формат файлов поддерживается?",
+      answer: "PDF и Word (.docx). Просто загрузи документ — и получи анализ.",
+    },
+    q2: {
+      question: "Это безопасно?",
+      answer: "Да. Мы не храним договоры на сервере без вашего согласия.",
+    },
+    q3: {
+      question: "Подходит ли для нотариусов и юристов?",
+      answer: "Да. Сервис помогает быстро находить спорные пункты и экономить время.",
+    },
+  },
+  footer: {
+    contact: "Контакты",
+    legal: "Политика конфиденциальности",
+    rights: "© 2025 Nexus Legal AI. Все права защищены.",
+  },
 };

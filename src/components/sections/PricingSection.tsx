@@ -1,4 +1,3 @@
-
 import React, { useEffect, useRef } from "react";
 import { useLanguage } from "@/context/LanguageContext";
 import { Button } from "@/components/ui/button";
@@ -45,9 +44,9 @@ export const PricingSection = () => {
     if (price === "Индивидуально" || price === "Individualno" || typeof price === "string" && isNaN(Number(price))) {
       return price;
     }
-    
+
     const numericPrice = Number(price);
-    
+
     if (region === "UZ" && language === "ru") {
       // For Uzbekistan in Russian language, show UZS with proper formatting
       const uzsPrice = numericPrice * 13000; // Example conversion
@@ -66,20 +65,19 @@ export const PricingSection = () => {
       {/* Background decoration */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(0,197,122,0.05),transparent_60%)] pointer-events-none"></div>
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_right,rgba(0,85,255,0.05),transparent_60%)] pointer-events-none"></div>
-      
+
       <div className="container-custom relative z-10">
         <h2 className="animate-stagger section-title text-center">{t("pricing.title")}</h2>
         <p className="animate-stagger section-subtitle text-center">{t("pricing.subtitle")}</p>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16">
-          {t("pricing.plans").map((plan: any, index: number) => (
+          {Object.entries(t("pricing.plans") || {}).map(([key, plan]: [string, any], index: number) => (
             <div
               key={index}
-              className={`animate-stagger feature-card flex flex-col relative transition-all duration-300 hover:shadow-xl ${
-                index === 1
+              className={`animate-stagger feature-card flex flex-col relative transition-all duration-300 hover:shadow-xl ${index === 1
                   ? "border-2 border-primary md:scale-105 md:-translate-y-2 shadow-lg"
                   : ""
-              }`}
+                }`}
             >
               {index === 1 && (
                 <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-primary text-white px-6 py-1 rounded-full text-sm font-semibold shadow-md">

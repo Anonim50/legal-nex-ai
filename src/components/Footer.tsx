@@ -1,4 +1,3 @@
-
 import React from "react";
 import { useLanguage } from "@/context/LanguageContext";
 
@@ -22,8 +21,8 @@ export const Footer = () => {
               {t("footer.links.company.title")}
             </h3>
             <ul className="space-y-2">
-              {t("footer.links.company.items").map((item: any, index: number) => (
-                <li key={index}>
+              {Object.entries(t("footer.links.company.items") || {}).map(([key, item]: [string, any]) => (
+                <li key={key}>
                   <a
                     href={item.url}
                     className="text-neutral-coolGray hover:text-white transition-colors"
@@ -40,8 +39,8 @@ export const Footer = () => {
               {t("footer.links.legal.title")}
             </h3>
             <ul className="space-y-2">
-              {t("footer.links.legal.items").map((item: any, index: number) => (
-                <li key={index}>
+              {Object.entries(t("footer.links.legal.items") || {}).map(([key, item]: [string, any]) => (
+                <li key={key}>
                   <a
                     href={item.url}
                     className="text-neutral-coolGray hover:text-white transition-colors"

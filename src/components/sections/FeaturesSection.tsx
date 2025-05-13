@@ -1,89 +1,123 @@
-
-import React, { useEffect, useRef } from "react";
+import React from "react";
 import { useLanguage } from "@/context/LanguageContext";
-import { FileText, Code, MessageSquare, Database, BookOpen, Shield } from "lucide-react";
-import { useIsMobile } from "@/hooks/use-mobile";
+import { motion } from "framer-motion";
+import {
+  FileText,
+  Code,
+  MessageSquare,
+  Database,
+  BookOpen,
+  Shield,
+  CheckCircle,
+  Zap,
+  Scale,
+  Search,
+  Users,
+  Lock
+} from "lucide-react";
+
+const fadeInUp = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5, ease: "easeOut" }
+  }
+};
+
+const container = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1
+    }
+  }
+};
 
 export const FeaturesSection = () => {
   const { t } = useLanguage();
-  const sectionRef = useRef<HTMLDivElement>(null);
-  const isMobile = useIsMobile();
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("animate-visible");
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.1, rootMargin: "0px 0px -100px 0px" }
-    );
-
-    const animElements = sectionRef.current?.querySelectorAll(".animate-stagger");
-    animElements?.forEach((el, i) => {
-      const element = el as HTMLElement;
-      element.style.animationDelay = `${i * 60}ms`;
-      observer.observe(element);
-    });
-
-    return () => {
-      animElements?.forEach((el) => {
-        observer.unobserve(el);
-      });
-    };
-  }, []);
 
   const featureIcons = [
-    { icon: FileText, color: "text-blue-500", bg: "bg-blue-100" },
-    { icon: Code, color: "text-purple-500", bg: "bg-purple-100" },
-    { icon: BookOpen, color: "text-orange-500", bg: "bg-orange-100" },
-    { icon: MessageSquare, color: "text-green-500", bg: "bg-green-100" },
-    { icon: Database, color: "text-red-500", bg: "bg-red-100" },
-    { icon: Shield, color: "text-indigo-500", bg: "bg-indigo-100" },
+    { icon: Scale, color: "text-blue-600", bg: "bg-blue-50", gradient: "from-blue-500/20 to-blue-600/20" },
+    { icon: Search, color: "text-purple-600", bg: "bg-purple-50", gradient: "from-purple-500/20 to-purple-600/20" },
+    { icon: BookOpen, color: "text-emerald-600", bg: "bg-emerald-50", gradient: "from-emerald-500/20 to-emerald-600/20" },
+    { icon: MessageSquare, color: "text-amber-600", bg: "bg-amber-50", gradient: "from-amber-500/20 to-amber-600/20" },
+    { icon: Users, color: "text-rose-600", bg: "bg-rose-50", gradient: "from-rose-500/20 to-rose-600/20" },
+    { icon: Lock, color: "text-indigo-600", bg: "bg-indigo-50", gradient: "from-indigo-500/20 to-indigo-600/20" }
   ];
 
   // Ensure features is always an array
   const features = Array.isArray(t("features.items")) ? t("features.items") : [];
 
   return (
-    <section id="features" className="py-20 md:py-28 bg-gradient-to-b from-neutral-softGray to-white relative" ref={sectionRef}>
-      {/* Background decoration */}
-      <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-white to-transparent"></div>
-      
-      <div className="container-custom relative z-10">
-        <h2 className="animate-stagger section-title text-center">
-          {t("features.title") || "Key Features"}
-        </h2>
-        <p className="animate-stagger section-subtitle text-center">
-          {t("features.subtitle") || "Powerful tools designed for Uzbekistan's legal landscape"}
-        </p>
+    <section className="py-24 bg-gradient-to-b from-white to-neutral-50/50 relative overflow-hidden">
+      {/* Background Patterns */}
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(0,197,122,0.05),transparent_70%)]"></div>
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_right,rgba(0,85,255,0.05),transparent_70%)]"></div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-16">
+      <div className="container mx-auto px-4 max-w-7xl relative z-10">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          className="text-center mb-16"
+        >
+          <motion.h2
+            variants={fadeInUp}
+            className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent"
+          >
+            {t("features.title") || "Key Features"}
+          </motion.h2>
+          <motion.p
+            variants={fadeInUp}
+            className="text-xl text-neutral-600 max-w-3xl mx-auto"
+          >
+            {t("features.subtitle") || "Powerful tools designed for Uzbekistan's legal landscape"}
+          </motion.p>
+        </motion.div>
+
+        <motion.div
+          variants={container}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+        >
           {features.map((feature: any, index: number) => {
             const IconConfig = featureIcons[index % featureIcons.length];
             const Icon = IconConfig.icon;
-            
+
             return (
-              <div
+              <motion.div
                 key={index}
-                className="animate-stagger feature-card group hover:shadow-xl transform transition-all duration-300 hover:-translate-y-2"
+                variants={fadeInUp}
+                className="group relative"
               >
-                <div className={`rounded-lg p-4 inline-block mb-5 ${IconConfig.bg} group-hover:scale-110 transition-transform duration-300`}>
-                  <Icon className={`w-6 h-6 ${IconConfig.color}`} />
+                <div className="relative p-8 bg-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 h-full">
+                  {/* Gradient Background */}
+                  <div className={`absolute inset-0 bg-gradient-to-br ${IconConfig.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl`}></div>
+
+                  {/* Content */}
+                  <div className="relative z-10">
+                    <div className={`${IconConfig.bg} ${IconConfig.color} w-14 h-14 rounded-xl flex items-center justify-center mb-6 transform group-hover:scale-110 transition-transform duration-300`}>
+                      <Icon className="w-7 h-7" />
+                    </div>
+
+                    <h3 className="text-xl font-bold mb-4 text-neutral-900 group-hover:text-neutral-800">
+                      {feature.title || `Feature ${index + 1}`}
+                    </h3>
+
+                    <p className="text-neutral-600 group-hover:text-neutral-700 line-clamp-3">
+                      {feature.description || ""}
+                    </p>
+                  </div>
                 </div>
-                <h3 className="text-xl font-bold mb-3">{feature.title || `Feature ${index + 1}`}</h3>
-                <p className="text-neutral-gray">{feature.description || ""}</p>
-              </div>
+              </motion.div>
             );
           })}
-        </div>
+        </motion.div>
       </div>
-      
-      {/* Bottom decoration */}
-      <div className="absolute bottom-0 left-0 w-full h-24 bg-gradient-to-t from-white to-transparent"></div>
     </section>
   );
 };

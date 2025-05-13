@@ -1,67 +1,73 @@
-export default {
-  title: "O‘zbekiston uchun sun’iy intellektli yurist",
-  subtitle:
-    "Shartnomani 30 soniyada tahlil qiling. Bizning AI xavflarni topadi, tarjima qiladi va tavsiyalar beradi — o‘zbek, rus va ingliz tillarida.",
+import { Translation } from "@/types/translations";
+
+const translations: Translation = {
+  title: "O'zbekiston uchun AI Yurist",
+  subtitle: "Shartnomalarni 30 soniyada tahlil qiling. Bizning AI xavflarni aniqlaydi, matnni tarjima qiladi va huquqiy maslahatlar beradi — o'zbek, rus va ingliz tillarida.",
   cta: {
-    primary: "Bepul sinab ko‘rish",
-    secondary: "Demo so‘rash",
+    title: "Huquqiy ishingizni optimallashtirishga tayyormisiz?",
+    description: "O'zbekistonning yetakchi huquqiy firmalariga qo'shiling Legal Nexus AI bilan",
+    primary: "Bepul sinab ko'ring",
+    secondary: "Demo so'rang"
   },
   features: {
     analysis: {
-      title: "Shartnoma tahlili",
-      description:
-        "AI PDF va Word fayllarini tahlil qiladi, xavfli va bahsli bandlarni aniqlaydi.",
+      title: "Shartnomalarni tahlil qilish",
+      description: "AI PDF va Word fayllarini tahlil qiladi, xavfli va bahsli bandlarni aniqlaydi."
     },
     translation: {
-      title: "Zudlik bilan tarjima",
-      description:
-        "Shartnomalarni o‘zbek, rus va ingliz tillariga avtomatik tarzda tarjima qiladi.",
+      title: "Tezkor tarjima",
+      description: "Shartnomalarni o'zbek, rus va ingliz tillariga avtomatik tarjima qiladi."
     },
     riskColoring: {
-      title: "Xavf rangli belgilanishi",
-      description:
-        "Qizil — xavfli bandlar, sariq — ehtiyotkorlik talab etiladi, yashil — xavfsiz.",
+      title: "Xavf darajasi bo'yicha ranglash",
+      description: "Qizil = yuqori xavf, Sariq = ogohlantirish, Yashil = xavfsiz bandlar. Hammasi ajratilgan."
     },
     summaries: {
-      title: "Xulosa va tavsiyalar",
-      description:
-        "AI hujjatning qisqacha mazmunini tuzadi va huquqiy tavsiyalar beradi.",
+      title: "Xulosalar va maslahatlar",
+      description: "AI qisqa xulosa va huquqiy maslahatlar beradi."
     },
     history: {
-      title: "Tahlil tarixi",
-      description:
-        "Tahlil qilingan fayllar saqlanadi va keyin ko‘rish mumkin. Telegram va Web versiyada ishlaydi.",
-    },
+      title: "Tahlillar tarixi",
+      description: "Tahlil qilingan fayllarni saqlang va istalgan vaqtda ko'rib chiqing. Telegram va veb orqali ishlaydi."
+    }
   },
   testimonials: {
-    title: "Foydalanuvchilar fikrlari",
-    user1: {
-      quote: "Oldin soatlarlab o‘qirdim, hozir bir daqiqada hammasi aniq.",
-      name: "Ahmadjon, YATT",
-    },
-    user2: {
-      quote: "Yuristsiz ham nima imzolayotganimni tushunaman.",
-      name: "Sevara, marketolog",
-    },
+    title: "Foydalanuvchilarimiz nima deyishadi",
+    items: [
+      {
+        quote: "Ilgari shartnomalarni o'qishga soatlab vaqt sarflardim. Endi bir daqiqa kifoya.",
+        name: "Ahmadjon",
+        role: "Tadbirkor"
+      },
+      {
+        quote: "Hatto yuristsiz ham nima imzolayotganimni bilaman.",
+        name: "Sevara",
+        role: "Marketolog"
+      }
+    ]
   },
   faq: {
-    title: "Ko‘p so‘raladigan savollar",
-    q1: {
-      question: "Qanday fayllar mos keladi?",
-      answer: "PDF va Word (.docx). Yuklang — va darhol tahlil qiling.",
-    },
-    q2: {
-      question: "Bu xavfsizmi?",
-      answer: "Ha. Siz rozilik bermasangiz, fayllar serverda saqlanmaydi.",
-    },
-    q3: {
-      question: "Notariuslar va yuristlar uchun foydalimi?",
-      answer: "Ha. Bu xizmat vaqtni tejaydi va bandlarni tezda aniqlaydi.",
-    },
+    title: "Ko'p so'raladigan savollar",
+    items: [
+      {
+        question: "Qanday fayl formatlari qo'llab-quvvatlanadi?",
+        answer: "PDF va Word (.docx). Faqat faylni yuklang — qolganini biz qilamiz."
+      },
+      {
+        question: "Bu xavfsizmi?",
+        answer: "Ha. Biz sizning ruxsatingizsiz shartnomalaringizni saqlamaymiz."
+      },
+      {
+        question: "Bu yuristlar va notariuslar uchun foydali?",
+        answer: "Albatta. Vaqtni tejaydi va muhim muammolarni tezda aniqlaydi."
+      }
+    ]
   },
   footer: {
     contact: "Aloqa",
     legal: "Maxfiylik siyosati",
-    rights: "© 2025 Nexus Legal AI. Barcha huquqlar himoyalangan.",
-  },
+    rights: "© 2025 Nexus Legal AI. Barcha huquqlar himoyalangan."
+  }
 };
+
+export default translations;

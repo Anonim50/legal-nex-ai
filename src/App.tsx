@@ -1,40 +1,49 @@
-
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Suspense, lazy } from "react";
 import "./App.css";
 import { Toaster } from "./components/ui/sonner";
 import { ThemeProvider } from "./components/theme-provider";
-import Index from "./pages/Index";
-import NotFound from "./pages/NotFound";
-import { useEffect } from "react";
 import { LanguageProvider } from "./context/LanguageContext";
-import Dashboard from "./pages/Dashboard";
-import Auth from "./pages/Auth";
 import { AuthProvider } from "./context/AuthContext";
-import { ProtectedRoute } from "./components/routes/ProtectedRoute";
+import { HelmetProvider } from 'react-helmet-async';
 import { ErrorBoundary } from "./components/ErrorBoundary";
+import { LoadingSpinner } from "./components/common/LoadingSpinner";
+
+// Lazy load pages
+const Index = lazy(() => import("./pages/Index"));
+const Dashboard = lazy(() => import("./pages/Dashboard"));
+const Auth = lazy(() => import("./pages/Auth"));
+const NotFound = lazy(() => import("./pages/NotFound"));
+
+// Loading fallback component
+const PageLoader = () => (
+  <div className="min-h-screen flex items-center justify-center">
+    <LoadingSpinner size="lg" />
+  </div>
+);
 
 function App() {
-  useEffect(() => {
-    document.documentElement.classList.add("scroll-smooth");
-  }, []);
-
   return (
     <ErrorBoundary>
-      <ThemeProvider defaultTheme="light" storageKey="vite-ui-theme">
-        <LanguageProvider>
-          <AuthProvider>
-            <Router>
-              <Routes>
-                <Route path="/" element={<Index />} />
-                <Route path="/auth" element={<Auth />} />
-                <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
-                <Route path="*" element={<NotFound />} />
-              </Routes>
-            </Router>
-            <Toaster position="bottom-right" />
-          </AuthProvider>
-        </LanguageProvider>
-      </ThemeProvider>
+      <HelmetProvider>
+        <ThemeProvider defaultTheme="light" storageKey="vite-ui-theme">
+          <LanguageProvider>
+            <AuthProvider>
+              <Router>
+                <Suspense fallback={<PageLoader />}>
+                  <Routes>
+                    <Route path="/" element={<Index />} />
+                    <Route path="/auth" element={<Auth />} />
+                    <Route path="/dashboard/*" element={<Dashboard />} />
+                    <Route path="*" element={<NotFound />} />
+                  </Routes>
+                </Suspense>
+              </Router>
+              <Toaster position="bottom-right" />
+            </AuthProvider>
+          </LanguageProvider>
+        </ThemeProvider>
+      </HelmetProvider>
     </ErrorBoundary>
   );
 }

@@ -1,14 +1,17 @@
+import { Translation, TranslationPath, TranslationValue } from "./translations";
 
 export type Language = "en" | "ru" | "uz";
 export type Region = "UZ" | "RU" | "OTHER";
 
 export interface LanguageContextType {
   language: Language;
-  setLanguage: (lang: Language) => void;
-  t: (key: string) => any;
+  setLanguage: (lang: Language) => Promise<void>;
+  t: <P extends TranslationPath>(key: P) => TranslationValue<P>;
+  tExists: (key: TranslationPath) => boolean;
   region: Region;
   formatPhone: (phone: string) => string;
   formatDate: (date: Date | string) => string;
+  isLoading: boolean;
 }
 
 // Default fallbacks for common array structures

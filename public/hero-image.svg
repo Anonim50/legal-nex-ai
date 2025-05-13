@@ -1,0 +1,20 @@
+<svg width="800" height="600" viewBox="0 0 800 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="800" height="600" fill="#F8FAFC"/>
+  <path d="M0 0h800v600H0z" fill="url(#gradient)"/>
+  <path fill-rule="evenodd" clip-rule="evenodd" d="M400 300c88.366 0 160-71.634 160-160S488.366-20 400-20 240 51.634 240 140s71.634 160 160 160z" fill="url(#blob1)" fill-opacity=".15"/>
+  <path fill-rule="evenodd" clip-rule="evenodd" d="M500 500c88.366 0 160-71.634 160-160s-71.634-160-160-160-160 71.634-160 160 71.634 160 160 160z" fill="url(#blob2)" fill-opacity=".1"/>
+  <defs>
+    <linearGradient id="gradient" x1="0" y1="0" x2="800" y2="600" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#E2E8F0"/>
+      <stop offset="1" stop-color="#F8FAFC"/>
+    </linearGradient>
+    <linearGradient id="blob1" x1="240" y1="140" x2="560" y2="140" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0055FF"/>
+      <stop offset="1" stop-color="#00C57A"/>
+    </linearGradient>
+    <linearGradient id="blob2" x1="340" y1="340" x2="660" y2="340" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#00C57A"/>
+      <stop offset="1" stop-color="#0055FF"/>
+    </linearGradient>
+  </defs>
+</svg> 

@@ -1,8 +1,12 @@
-export default {
+import { Translation } from "@/types/translations";
+
+const translations: Translation = {
   title: "AI Lawyer for Uzbekistan",
   subtitle:
     "Analyze contracts in 30 seconds. Our AI detects risks, translates content, and provides legal suggestions — in Uzbek, Russian, and English.",
   cta: {
+    title: "Ready to optimize your legal work?",
+    description: "Join leading legal firms in Uzbekistan using Legal Nexus AI",
     primary: "Try for Free",
     secondary: "Request Demo",
   },
@@ -34,30 +38,36 @@ export default {
     },
   },
   testimonials: {
-    title: "Testimonials",
-    user1: {
-      quote: "I used to spend hours reading contracts. Now it takes me one minute.",
-      name: "Akhmadjon, entrepreneur",
-    },
-    user2: {
-      quote: "Even without a lawyer, I know what I'm signing.",
-      name: "Sevara, marketer",
-    },
+    title: "What Our Users Say",
+    items: [
+      {
+        quote: "I used to spend hours reading contracts. Now it takes me one minute.",
+        name: "Akhmadjon",
+        role: "Entrepreneur",
+      },
+      {
+        quote: "Even without a lawyer, I know what I'm signing.",
+        name: "Sevara",
+        role: "Marketer",
+      },
+    ],
   },
   faq: {
     title: "Frequently Asked Questions",
-    q1: {
-      question: "Which file formats are supported?",
-      answer: "PDF and Word (.docx). Just upload your file — we do the rest.",
-    },
-    q2: {
-      question: "Is it secure?",
-      answer: "Yes. We don’t store your contracts without your permission.",
-    },
-    q3: {
-      question: "Is it useful for lawyers and notaries?",
-      answer: "Absolutely. Saves time and highlights key issues instantly.",
-    },
+    items: [
+      {
+        question: "Which file formats are supported?",
+        answer: "PDF and Word (.docx). Just upload your file — we do the rest.",
+      },
+      {
+        question: "Is it secure?",
+        answer: "Yes. We don't store your contracts without your permission.",
+      },
+      {
+        question: "Is it useful for lawyers and notaries?",
+        answer: "Absolutely. Saves time and highlights key issues instantly.",
+      },
+    ],
   },
   footer: {
     contact: "Contact",
@@ -65,3 +75,5 @@ export default {
     rights: "© 2025 Nexus Legal AI. All rights reserved.",
   },
 };
+
+export default translations;

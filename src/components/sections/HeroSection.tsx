@@ -111,10 +111,15 @@ export const HeroSection = () => {
                 initial={{ scale: 1.1 }}
                 animate={{ scale: 1 }}
                 transition={{ duration: 0.8, ease: "easeOut" }}
-                src="/hero-image.webp" // Make sure to add this image to your public folder
+                src="/hero-image.svg"
                 alt="Legal AI Interface"
                 className="w-full h-auto object-cover hover:opacity-90 transition-all duration-500"
                 loading="lazy"
+                onError={(e) => {
+                  const target = e.target as HTMLImageElement;
+                  target.onerror = null;
+                  target.src = '/placeholder.svg';
+                }}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-primary/20 via-transparent to-transparent mix-blend-overlay"></div>
             </div>

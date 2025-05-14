@@ -1,9 +1,9 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { useLanguage } from '@/context/LanguageContext';
-import { Link } from 'react-router-dom';
-import { Helmet } from 'react-helmet-async';
-import { Scale } from 'lucide-react';
+import React from "react";
+import { motion } from "framer-motion";
+import { useLanguage } from "@/context/LanguageContext";
+import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
+import { Scale } from "lucide-react";
 
 const fadeIn = {
   hidden: { opacity: 0, y: 20 },
@@ -12,9 +12,9 @@ const fadeIn = {
     y: 0,
     transition: {
       duration: 0.6,
-      ease: [0.22, 1, 0.36, 1]
-    }
-  }
+      ease: [0.22, 1, 0.36, 1],
+    },
+  },
 };
 
 export default function NotFound() {
@@ -24,7 +24,10 @@ export default function NotFound() {
     <>
       <Helmet>
         <title>404 - {t("title")} | Legal Nexus AI</title>
-        <meta name="description" content="Page not found. Please check the URL or return to homepage." />
+        <meta
+          name="description"
+          content="Page not found. Please check the URL or return to homepage."
+        />
         <meta name="robots" content="noindex, follow" />
       </Helmet>
 
@@ -38,9 +41,9 @@ export default function NotFound() {
               visible: {
                 opacity: 1,
                 transition: {
-                  staggerChildren: 0.15
-                }
-              }
+                  staggerChildren: 0.15,
+                },
+              },
             }}
           >
             <motion.div variants={fadeIn} className="mb-8">

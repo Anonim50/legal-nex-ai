@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
+import { PostgrestError } from "@supabase/supabase-js";
 
 import { Table, TableBody } from "@/components/ui/table";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -16,6 +17,13 @@ interface Props {
   documents: Document[];
   loading: boolean;
 }
+
+interface StorageError {
+  message: string;
+  statusCode?: number;
+}
+
+type SupabaseError = StorageError | PostgrestError;
 
 export const DocumentTable = ({ documents, loading }: Props) => {
   /* ───────────────────── локальное состояние списка ───────────────────── */
@@ -39,7 +47,10 @@ export const DocumentTable = ({ documents, loading }: Props) => {
       setSelectedDoc(doc);
       setIsPreviewOpen(true);
 
-      const { data: { signedUrl }, error } = await supabase.storage
+      const {
+        data: { signedUrl },
+        error,
+      } = await supabase.storage
         .from("legal_documents")
         .createSignedUrl(doc.file_path, 3600);
       if (error) throw error;
@@ -59,7 +70,8 @@ export const DocumentTable = ({ documents, loading }: Props) => {
         setPreviewContent(await data.text());
       }
     } catch (err) {
-      console.error(err);
+      const error = err as SupabaseError;
+      console.error(error);
       toast.error("Error loading preview");
     }
   };
@@ -85,9 +97,10 @@ export const DocumentTable = ({ documents, loading }: Props) => {
       toast.success("Document deleted");
       setIsDeleteOpen(false);
       setSelectedDoc(null);
-    } catch (err: any) {
-      console.error(err);
-      toast.error("Delete error: " + (err.message ?? ""));
+    } catch (err: unknown) {
+      const error = err as SupabaseError;
+      console.error(error);
+      toast.error("Delete error: " + (error.message ?? "Unknown error"));
     }
   };
 
@@ -100,11 +113,21 @@ export const DocumentTable = ({ documents, loading }: Props) => {
           <TableBody>
             {[...Array(3)].map((_, i) => (
               <tr key={i} className="border-b hover:bg-neutral-softGray/50">
-                <td className="p-4"><Skeleton className="h-4 w-[240px]" /></td>
-                <td className="p-4"><Skeleton className="h-4 w-[80px]" /></td>
-                <td className="p-4"><Skeleton className="h-6 w-[100px]" /></td>
-                <td className="p-4"><Skeleton className="h-6 w-[80px]" /></td>
-                <td className="p-4"><Skeleton className="h-4 w-[80px]" /></td>
+                <td className="p-4">
+                  <Skeleton className="h-4 w-[240px]" />
+                </td>
+                <td className="p-4">
+                  <Skeleton className="h-4 w-[80px]" />
+                </td>
+                <td className="p-4">
+                  <Skeleton className="h-6 w-[100px]" />
+                </td>
+                <td className="p-4">
+                  <Skeleton className="h-6 w-[80px]" />
+                </td>
+                <td className="p-4">
+                  <Skeleton className="h-4 w-[80px]" />
+                </td>
                 <td className="p-4 text-right flex gap-2 justify-end">
                   <Skeleton className="h-8 w-8 rounded" />
                   <Skeleton className="h-8 w-8 rounded" />

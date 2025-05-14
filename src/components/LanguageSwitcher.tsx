@@ -7,25 +7,33 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { Language, Region } from "@/types/language";
 
-const languages = [
+interface LanguageOption {
+  code: Language;
+  label: string;
+  flag: string;
+  region: Region;
+}
+
+const languages: LanguageOption[] = [
   {
     code: "ru",
     label: "Русский",
     flag: "🇷🇺",
-    region: "RU"
+    region: "RU",
   },
   {
     code: "uz",
     label: "O'zbek",
     flag: "🇺🇿",
-    region: "UZ"
+    region: "UZ",
   },
   {
     code: "en",
     label: "English",
     flag: "🇬🇧",
-    region: "OTHER"
+    region: "OTHER",
   },
 ];
 
@@ -45,11 +53,14 @@ export const LanguageSwitcher = () => {
           <span className="text-sm font-medium">{currentLanguage?.label}</span>
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="bg-white/95 backdrop-blur-sm border shadow-lg min-w-[150px]">
+      <DropdownMenuContent
+        align="end"
+        className="bg-white/95 backdrop-blur-sm border shadow-lg min-w-[150px]"
+      >
         {languages.map((lang) => (
           <DropdownMenuItem
             key={lang.code}
-            onClick={() => setLanguage(lang.code as "ru" | "uz" | "en")}
+            onClick={() => setLanguage(lang.code)}
             className={`
               flex items-center gap-3 px-4 py-2.5
               ${language === lang.code ? "bg-primary/5 text-primary" : ""}

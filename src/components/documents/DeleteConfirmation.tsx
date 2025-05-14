@@ -1,4 +1,3 @@
-
 import {
   AlertDialog,
   AlertDialogAction,
@@ -17,11 +16,11 @@ interface DeleteConfirmationProps {
   documentName: string | React.ReactNode;
 }
 
-export const DeleteConfirmation = ({ 
-  isOpen, 
-  onClose, 
-  onConfirm, 
-  documentName 
+export const DeleteConfirmation = ({
+  isOpen,
+  onClose,
+  onConfirm,
+  documentName,
 }: DeleteConfirmationProps) => {
   return (
     <AlertDialog open={isOpen} onOpenChange={onClose}>
@@ -29,12 +28,14 @@ export const DeleteConfirmation = ({
         <AlertDialogHeader>
           <AlertDialogTitle>Delete Document</AlertDialogTitle>
           <AlertDialogDescription>
-            Are you sure you want to delete "{typeof documentName === 'string' ? documentName : 'this document'}"? This action cannot be undone.
+            Are you sure you want to delete "
+            {typeof documentName === "string" ? documentName : "this document"}
+            "? This action cannot be undone.
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel onClick={onClose}>Cancel</AlertDialogCancel>
-          <AlertDialogAction 
+          <AlertDialogAction
             onClick={onConfirm}
             className="bg-destructive hover:bg-destructive/90"
           >

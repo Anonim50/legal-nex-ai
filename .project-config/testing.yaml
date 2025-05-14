@@ -1,0 +1,13 @@
+tests:
+  unit:
+    pattern: "^tests/unit/.*\\.(spec|test)\\.ts$"
+    framework: Vitest
+    description: |
+      • Cover hooks, utils, components
+      • Structure mirrors src/
+  e2e:
+    pattern: "^tests/e2e/.*\\.(spec|test)\\.ts$"
+    framework: Playwright
+    description: |
+      • Full user flows: login → upload → result
+      • Tests should be reusable and readable

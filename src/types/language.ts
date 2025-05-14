@@ -18,30 +18,30 @@ export interface LanguageContextType {
 export const defaultFallbacks = {
   features: {
     items: [],
-    points: []
+    points: [],
   },
   faq: {
-    items: []
+    items: [],
   },
   testimonials: {
-    items: []
+    items: [],
   },
   personas: {
-    items: []
+    items: [],
   },
   advantages: {
     table: {
       headers: [],
-      rows: []
-    }
+      rows: [],
+    },
   },
   security: {
-    features: []
+    features: [],
   },
   cta: {
     title: "Ready to optimize your legal work?",
     description: "Join leading legal firms in Uzbekistan using Legal Nexus AI",
     primary: "Try for free",
-    secondary: "Request demo"
-  }
+    secondary: "Request demo",
+  },
 };

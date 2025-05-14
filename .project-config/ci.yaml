@@ -1,0 +1,15 @@
+ci:
+  pre_commit:
+    - pnpm lint
+    - pnpm typecheck
+  github_actions:
+    - name: Build & Test
+      steps:
+        - pnpm install
+        - pnpm lint
+        - pnpm run build
+        - pnpm test
+    - name: Deploy
+      steps:
+        - vercel --prod
+        - supabase functions deploy analyze-document --project-ref $SUPA_REF

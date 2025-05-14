@@ -1,9 +1,11 @@
 import React from "react";
 import { useLanguage } from "@/context/LanguageContext";
+import { FooterSection } from "@/types/translations";
 
 export const Footer = () => {
   const { t } = useLanguage();
   const currentYear = new Date().getFullYear();
+  const footer = t<"footer">('footer') as FooterSection;
 
   return (
     <footer className="bg-neutral-darkPurple text-white py-12">
@@ -12,59 +14,64 @@ export const Footer = () => {
           <div className="col-span-1 lg:col-span-2">
             <h2 className="text-2xl font-bold mb-4">Legal Nexus AI</h2>
             <p className="text-neutral-coolGray mb-6 max-w-sm">
-              The first legal AI assistant fully adapted to Uzbekistan's legislation.
+              The first legal AI assistant fully adapted to Uzbekistan's
+              legislation.
             </p>
           </div>
 
           <div>
             <h3 className="text-lg font-medium mb-4">
-              {t("footer.links.company.title")}
+              {footer.links.company.title}
             </h3>
             <ul className="space-y-2">
-              {Object.entries(t("footer.links.company.items") || {}).map(([key, item]: [string, any]) => (
-                <li key={key}>
-                  <a
-                    href={item.url}
-                    className="text-neutral-coolGray hover:text-white transition-colors"
-                  >
-                    {item.text}
-                  </a>
-                </li>
-              ))}
+              {Object.entries(footer.links.company.items).map(
+                ([key, item]) => (
+                  <li key={key}>
+                    <a
+                      href={item.url}
+                      className="text-neutral-coolGray hover:text-white transition-colors"
+                    >
+                      {item.text}
+                    </a>
+                  </li>
+                ),
+              )}
             </ul>
           </div>
 
           <div>
             <h3 className="text-lg font-medium mb-4">
-              {t("footer.links.legal.title")}
+              {footer.links.legal.title}
             </h3>
             <ul className="space-y-2">
-              {Object.entries(t("footer.links.legal.items") || {}).map(([key, item]: [string, any]) => (
-                <li key={key}>
-                  <a
-                    href={item.url}
-                    className="text-neutral-coolGray hover:text-white transition-colors"
-                  >
-                    {item.text}
-                  </a>
-                </li>
-              ))}
+              {Object.entries(footer.links.legal.items).map(
+                ([key, item]) => (
+                  <li key={key}>
+                    <a
+                      href={item.url}
+                      className="text-neutral-coolGray hover:text-white transition-colors"
+                    >
+                      {item.text}
+                    </a>
+                  </li>
+                ),
+              )}
             </ul>
           </div>
 
           <div>
             <h3 className="text-lg font-medium mb-4">
-              {t("footer.contact.title")}
+              {footer.contact.title}
             </h3>
             <ul className="space-y-2">
               <li className="text-neutral-coolGray">
-                {t("footer.contact.email")}
+                {footer.contact.email}
               </li>
               <li className="text-neutral-coolGray">
-                {t("footer.contact.phone")}
+                {footer.contact.phone}
               </li>
               <li className="text-neutral-coolGray">
-                {t("footer.contact.address")}
+                {footer.contact.address}
               </li>
             </ul>
           </div>
@@ -72,7 +79,7 @@ export const Footer = () => {
 
         <div className="border-t border-white/10 mt-10 pt-6 flex flex-col md:flex-row justify-between items-center">
           <p className="text-sm text-neutral-coolGray">
-            {t("footer.copyright").replace("2025", currentYear.toString())}
+            {footer.copyright.replace("2025", currentYear.toString())}
           </p>
           <div className="flex space-x-4 mt-4 md:mt-0">
             <a href="#" className="text-neutral-coolGray hover:text-white">

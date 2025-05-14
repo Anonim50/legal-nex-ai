@@ -17,16 +17,20 @@ export const FAQSection = () => {
   const sectionRef = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("animate-visible");
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.1 });
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("animate-visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.1 },
+    );
 
-    const animElements = sectionRef.current?.querySelectorAll(".animate-stagger");
+    const animElements =
+      sectionRef.current?.querySelectorAll(".animate-stagger");
     animElements?.forEach((el) => observer.observe(el));
 
     return () => {
@@ -46,10 +50,16 @@ export const FAQSection = () => {
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(0,197,122,0.03),transparent_70%)] pointer-events-none"></div>
 
       <div className="container max-w-3xl mx-auto text-center mb-10">
-        <h2 className="text-3xl md:text-4xl font-bold text-primary animate-stagger">{faqTitle}</h2>
+        <h2 className="text-3xl md:text-4xl font-bold text-primary animate-stagger">
+          {faqTitle}
+        </h2>
       </div>
 
-      <Accordion type="single" collapsible className="max-w-2xl mx-auto space-y-4">
+      <Accordion
+        type="single"
+        collapsible
+        className="max-w-2xl mx-auto space-y-4"
+      >
         {faqItems.map(([key, item]) => (
           <AccordionItem
             key={key}
@@ -68,7 +78,13 @@ export const FAQSection = () => {
 
       <div className="mt-12 text-center animate-stagger">
         <p className="text-neutral-gray">
-          Can't find the answer you're looking for? <a href="#contact" className="text-primary hover:underline font-medium">Contact our support team</a>
+          Can't find the answer you're looking for?{" "}
+          <a
+            href="#contact"
+            className="text-primary hover:underline font-medium"
+          >
+            Contact our support team
+          </a>
         </p>
       </div>
     </section>

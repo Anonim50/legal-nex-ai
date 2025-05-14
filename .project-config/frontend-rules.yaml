@@ -1,0 +1,12 @@
+rules:
+  - pattern: "^src/pages/.*\\.tsx$"
+    description: |
+      • Pages must NOT include layout or padding classes.
+      • Must include a Breadcrumbs component at the top.
+      • Helper components stay next to page.tsx (no nested /components).
+
+  - pattern: "^src/components/.*\\.tsx$"
+    description: |
+      • UI atoms and wrappers only (Shadcn, Radix).
+      • Use Tailwind CSS only.
+      • Use next/image with lazy loading.

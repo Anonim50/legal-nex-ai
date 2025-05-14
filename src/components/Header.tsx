@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { useLanguage } from "@/context/LanguageContext";
 import { LanguageSwitcher } from "./LanguageSwitcher";
@@ -28,7 +27,9 @@ export const Header = () => {
   ];
 
   const trackCTAClick = (ctaName: string) => {
-    window.dispatchEvent(new CustomEvent("cta_click", { detail: { cta: ctaName } }));
+    window.dispatchEvent(
+      new CustomEvent("cta_click", { detail: { cta: ctaName } }),
+    );
   };
 
   return (
@@ -60,10 +61,7 @@ export const Header = () => {
           </ul>
           <div className="flex items-center space-x-3">
             <LanguageSwitcher />
-            <Button 
-              size="sm" 
-              onClick={() => trackCTAClick("header_try_free")}
-            >
+            <Button size="sm" onClick={() => trackCTAClick("header_try_free")}>
               {t("hero.cta.primary")}
             </Button>
           </div>
@@ -100,8 +98,8 @@ export const Header = () => {
                 </li>
               ))}
               <li>
-                <Button 
-                  className="w-full mt-4" 
+                <Button
+                  className="w-full mt-4"
                   onClick={() => {
                     trackCTAClick("header_mobile_try_free");
                     setIsMobileMenuOpen(false);

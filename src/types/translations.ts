@@ -22,13 +22,50 @@ export interface CTASection {
   secondary: string;
 }
 
+export interface FooterLink {
+  url: string;
+  text: string;
+}
+
 export interface FooterSection {
-  contact: string;
-  legal: string;
-  rights: string;
+  links: {
+    company: {
+      title: string;
+      items: Record<string, FooterLink>;
+    };
+    legal: {
+      title: string;
+      items: Record<string, FooterLink>;
+    };
+  };
+  contact: {
+    title: string;
+    email: string;
+    phone: string;
+    address: string;
+  };
+  copyright: string;
+}
+
+export interface FormSection {
+  fields: {
+    role: {
+      options: Record<string, string>;
+    };
+    company_size: {
+      options: Record<string, string>;
+    };
+    language: {
+      options: Record<string, string>;
+    };
+  };
+  success: string;
+  error: string;
 }
 
 export interface FeaturesSection {
+  title: string;
+  subtitle: string;
   analysis: Feature;
   translation: Feature;
   riskColoring: Feature;
@@ -54,12 +91,14 @@ export interface Translation {
   testimonials: TestimonialsSection;
   faq: FAQSection;
   footer: FooterSection;
+  form: FormSection;
 }
 
 // Type-safe translation key paths
-export type TranslationKey = keyof Translation |
-  `${keyof Translation}.${string}` |
-  `${keyof Translation}.${string}.${string}`;
+export type TranslationKey =
+  | keyof Translation
+  | `${keyof Translation}.${string}`
+  | `${keyof Translation}.${string}.${string}`;
 
 // Utility type to get nested value types
 export type NestedKeyOf<ObjectType extends object> = {
@@ -71,8 +110,7 @@ export type NestedKeyOf<ObjectType extends object> = {
 export type TranslationPath = NestedKeyOf<Translation>;
 
 // Type to get the value type for a given path
-export type PathValue<T, P extends string> =
-  P extends keyof T
+export type PathValue<T, P extends string> = P extends keyof T
   ? T[P]
   : P extends `${infer K}.${infer Rest}`
   ? K extends keyof T
@@ -80,11 +118,20 @@ export type PathValue<T, P extends string> =
   : never
   : never;
 
-export type TranslationValue<P extends TranslationPath> = PathValue<Translation, P>;
+export type TranslationValue<P extends TranslationPath> = PathValue<
+  Translation,
+  P
+>;
 
 // Helper type for translation values
-export type TranslationValueType = string | number | boolean | Testimonial[] | FAQItem[] | Feature[];
+export type TranslationValueType =
+  | string
+  | number
+  | boolean
+  | Testimonial[]
+  | FAQItem[]
+  | Feature[];
 
 // Specific path value types
 export type TestimonialItems = Testimonial[];
-export type TestimonialTitle = string; 
+export type TestimonialTitle = string;

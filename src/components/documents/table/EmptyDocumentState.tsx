@@ -1,4 +1,3 @@
-
 import { Upload } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -12,7 +11,8 @@ export const EmptyDocumentState = () => {
         No documents uploaded
       </h3>
       <p className="text-sm text-neutral-coolGray mb-6 max-w-sm">
-        Upload your first document to start analyzing your legal documents with AI
+        Upload your first document to start analyzing your legal documents with
+        AI
       </p>
       <Button variant="default" className="font-medium">
         Upload Document

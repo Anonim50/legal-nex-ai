@@ -9,16 +9,16 @@ const fadeIn = {
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.6, ease: "easeOut" }
-  }
+    transition: { duration: 0.6, ease: "easeOut" },
+  },
 };
 
 const stagger = {
   visible: {
     transition: {
-      staggerChildren: 0.2
-    }
-  }
+      staggerChildren: 0.2,
+    },
+  },
 };
 
 export const HeroSection = () => {
@@ -26,7 +26,9 @@ export const HeroSection = () => {
   const navigate = useNavigate();
 
   const trackCTAClick = (ctaName: string) => {
-    window.dispatchEvent(new CustomEvent("cta_click", { detail: { cta: ctaName } }));
+    window.dispatchEvent(
+      new CustomEvent("cta_click", { detail: { cta: ctaName } }),
+    );
   };
 
   // Handlers for CTA buttons
@@ -42,7 +44,9 @@ export const HeroSection = () => {
 
   // Safely extract the text from translation objects
   const heroTitle = t("title") || "AI-Powered Legal Assistant for Uzbekistan";
-  const heroSubtitle = t("subtitle") || "Streamline your legal work with the first AI assistant fully adapted to Uzbekistan's legislation";
+  const heroSubtitle =
+    t("subtitle") ||
+    "Streamline your legal work with the first AI assistant fully adapted to Uzbekistan's legislation";
   const ctaPrimary = t("cta.primary") || "Try for Free";
   const ctaSecondary = t("cta.secondary") || "Request Demo";
 
@@ -118,7 +122,7 @@ export const HeroSection = () => {
                 onError={(e) => {
                   const target = e.target as HTMLImageElement;
                   target.onerror = null;
-                  target.src = '/placeholder.svg';
+                  target.src = "/placeholder.svg";
                 }}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-primary/20 via-transparent to-transparent mix-blend-overlay"></div>

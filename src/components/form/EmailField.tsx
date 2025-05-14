@@ -1,7 +1,12 @@
-
-import React from 'react';
+import React from "react";
 import { useLanguage } from "@/context/LanguageContext";
-import { FormField, FormItem, FormLabel, FormControl, FormMessage } from "@/components/ui/form";
+import {
+  FormField,
+  FormItem,
+  FormLabel,
+  FormControl,
+  FormMessage,
+} from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { safeTranslation } from "@/utils/formUtils";
 import { UseFormReturn } from "react-hook-form";
@@ -24,9 +29,13 @@ export const EmailField: React.FC<EmailFieldProps> = ({ form }) => {
             {safeTranslation(t, "form.fields.email.label", "Email")}
           </FormLabel>
           <FormControl>
-            <Input 
-              placeholder={safeTranslation(t, "form.fields.email.placeholder", "Enter your email")} 
-              {...field} 
+            <Input
+              placeholder={safeTranslation(
+                t,
+                "form.fields.email.placeholder",
+                "Enter your email",
+              )}
+              {...field}
               type="email"
             />
           </FormControl>

@@ -1,4 +1,3 @@
-
 {
   "form": {
     "title": "Aloqaga chiqing",
@@ -31,11 +30,7 @@
       "language": {
         "label": "Afzal til",
         "placeholder": "Tilni tanlang",
-        "options": [
-          "Ingliz tili",
-          "Rus tili",
-          "O'zbek tili"
-        ]
+        "options": ["Ingliz tili", "Rus tili", "O'zbek tili"]
       }
     },
     "submit": "Yuborish",

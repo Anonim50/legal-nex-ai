@@ -2,43 +2,54 @@ import React from "react";
 import { useLanguage } from "@/context/LanguageContext";
 import { motion } from "framer-motion";
 import { Quote } from "lucide-react";
-import { Testimonial, TestimonialItems, TestimonialTitle } from "@/types/translations";
+import {
+  Testimonial,
+  TestimonialItems,
+  TestimonialTitle,
+} from "@/types/translations";
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 20 },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.5, ease: "easeOut" }
-  }
+    transition: { duration: 0.5, ease: "easeOut" },
+  },
 };
 
 const container = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
-    transition: { staggerChildren: 0.2 }
-  }
+    transition: { staggerChildren: 0.2 },
+  },
 };
 
 export const TestimonialsSection: React.FC = () => {
   const { t, isLoading } = useLanguage();
   const testimonials = t<TestimonialItems>("testimonials.items") ?? [];
-  const title = t<TestimonialTitle>("testimonials.title") ?? "What Our Users Say";
+  const title =
+    t<TestimonialTitle>("testimonials.title") ?? "What Our Users Say";
 
   if (isLoading) {
-    return <div role="status" aria-label="Loading testimonials" className="animate-pulse">
-      {/* Loading skeleton */}
-      <div className="h-8 bg-gray-200 rounded w-1/3 mx-auto mb-8"></div>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {[1, 2, 3].map((i) => (
-          <div key={i} className="bg-white rounded-2xl p-8 shadow-md">
-            <div className="h-4 bg-gray-200 rounded w-3/4 mb-4"></div>
-            <div className="h-4 bg-gray-200 rounded w-1/2"></div>
-          </div>
-        ))}
+    return (
+      <div
+        role="status"
+        aria-label="Loading testimonials"
+        className="animate-pulse"
+      >
+        {/* Loading skeleton */}
+        <div className="h-8 bg-gray-200 rounded w-1/3 mx-auto mb-8"></div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {[1, 2, 3].map((i) => (
+            <div key={i} className="bg-white rounded-2xl p-8 shadow-md">
+              <div className="h-4 bg-gray-200 rounded w-3/4 mb-4"></div>
+              <div className="h-4 bg-gray-200 rounded w-1/2"></div>
+            </div>
+          ))}
+        </div>
       </div>
-    </div>;
+    );
   }
 
   if (!testimonials?.length) {
@@ -120,9 +131,13 @@ export const TestimonialsSection: React.FC = () => {
                   </div>
                 )}
                 <div>
-                  <div className="font-medium text-neutral-900">{testimonial.name}</div>
+                  <div className="font-medium text-neutral-900">
+                    {testimonial.name}
+                  </div>
                   {testimonial.role && (
-                    <div className="text-sm text-neutral-500">{testimonial.role}</div>
+                    <div className="text-sm text-neutral-500">
+                      {testimonial.role}
+                    </div>
                   )}
                 </div>
               </div>

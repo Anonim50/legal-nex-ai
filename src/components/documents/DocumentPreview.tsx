@@ -1,4 +1,3 @@
-
 import {
   Dialog,
   DialogContent,
@@ -17,24 +16,27 @@ interface DocumentPreviewProps {
   documentType: string;
 }
 
-export const DocumentPreview = ({ 
-  isOpen, 
-  onClose, 
-  documentUrl, 
-  documentContent, 
+export const DocumentPreview = ({
+  isOpen,
+  onClose,
+  documentUrl,
+  documentContent,
   documentName,
-  documentType 
+  documentType,
 }: DocumentPreviewProps) => {
-  const isTextFile = documentType === 'text/plain' || 
-                     documentType === 'application/txt' || 
-                     (documentUrl && documentUrl.endsWith('.txt'));
+  const isTextFile =
+    documentType === "text/plain" ||
+    documentType === "application/txt" ||
+    (documentUrl && documentUrl.endsWith(".txt"));
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="max-w-4xl h-[80vh]">
         <DialogHeader>
           <DialogTitle>
-            {typeof documentName === 'string' ? documentName : 'Document Preview'}
+            {typeof documentName === "string"
+              ? documentName
+              : "Document Preview"}
           </DialogTitle>
         </DialogHeader>
         <ScrollArea className="h-full w-full rounded-md border">
@@ -46,7 +48,7 @@ export const DocumentPreview = ({
             <iframe
               src={documentUrl}
               className="w-full h-full min-h-[60vh]"
-              title={`Preview of ${typeof documentName === 'string' ? documentName : 'document'}`}
+              title={`Preview of ${typeof documentName === "string" ? documentName : "document"}`}
             />
           ) : (
             <div className="p-4">

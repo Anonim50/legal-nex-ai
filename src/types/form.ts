@@ -1,4 +1,3 @@
-
 // Common form-related type definitions
 
 export interface SelectOption {

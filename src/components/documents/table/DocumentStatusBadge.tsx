@@ -1,7 +1,11 @@
-
 import { Badge } from "@/components/ui/badge";
 import { Check, Clock, AlertTriangle } from "lucide-react";
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 interface DocumentStatusBadgeProps {
   status: string;
@@ -10,23 +14,23 @@ interface DocumentStatusBadgeProps {
 export const DocumentStatusBadge = ({ status }: DocumentStatusBadgeProps) => {
   const getStatusConfig = (status: string) => {
     switch (status) {
-      case 'analyzed':
+      case "analyzed":
         return {
-          color: 'bg-green-500',
+          color: "bg-green-500",
           icon: Check,
-          tooltip: 'Analysis complete'
+          tooltip: "Analysis complete",
         };
-      case 'pending':
+      case "pending":
         return {
-          color: 'bg-yellow-500',
+          color: "bg-yellow-500",
           icon: Clock,
-          tooltip: 'Analysis in progress'
+          tooltip: "Analysis in progress",
         };
       default:
         return {
-          color: 'bg-gray-500',
+          color: "bg-gray-500",
           icon: AlertTriangle,
-          tooltip: 'Status unknown'
+          tooltip: "Status unknown",
         };
     }
   };
@@ -37,7 +41,7 @@ export const DocumentStatusBadge = ({ status }: DocumentStatusBadgeProps) => {
     <TooltipProvider>
       <Tooltip>
         <TooltipTrigger asChild>
-          <Badge 
+          <Badge
             className={`inline-flex items-center gap-1 ${statusConfig.color} transition-colors`}
           >
             <statusConfig.icon className="h-3 w-3" />

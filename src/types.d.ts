@@ -3,6 +3,8 @@
 /// <reference types="react-router-dom" />
 /// <reference types="vite/client" />
 
+import type { FunctionComponent, SVGProps } from 'react';
+
 // Vite environment variables
 interface ImportMetaEnv {
   readonly VITE_SUPABASE_URL: string;
@@ -14,26 +16,25 @@ interface ImportMeta {
 }
 
 // Module declarations
-declare module '@supabase/supabase-js';
+declare module "@supabase/supabase-js";
 
-declare module '*.svg' {
-  import * as React from 'react';
-  export const ReactComponent: React.FunctionComponent<React.SVGProps<SVGSVGElement>>;
+declare module "*.svg" {
+  export const ReactComponent: FunctionComponent<SVGProps<SVGSVGElement>>;
   const src: string;
   export default src;
 }
 
-declare module '*.jpg' {
+declare module "*.jpg" {
   const content: string;
   export default content;
 }
 
-declare module '*.png' {
+declare module "*.png" {
   const content: string;
   export default content;
 }
 
-declare module '*.json' {
-  const content: any;
+declare module "*.json" {
+  const content: Record<string, unknown>;
   export default content;
-} 
+}

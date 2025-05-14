@@ -1,5 +1,9 @@
 import { Language } from "@/types/language";
-import { Translation, TranslationPath, TranslationValue } from "@/types/translations";
+import {
+  Translation,
+  TranslationPath,
+  TranslationValue,
+} from "@/types/translations";
 import get from "lodash/get";
 
 interface TranslationHook {
@@ -9,13 +13,15 @@ interface TranslationHook {
 
 export function useTranslation(
   translations: Record<Language, Translation>,
-  currentLanguage: Language
+  currentLanguage: Language,
 ): TranslationHook {
   const t = <P extends TranslationPath>(key: P): TranslationValue<P> => {
     const value = get(translations[currentLanguage], key);
 
     if (value === undefined) {
-      console.warn(`Translation missing for key: ${key} in language: ${currentLanguage}`);
+      console.warn(
+        `Translation missing for key: ${key} in language: ${currentLanguage}`,
+      );
       // Fallback to English if available
       const fallback = get(translations["en"], key);
       if (fallback !== undefined) {

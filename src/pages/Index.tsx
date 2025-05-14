@@ -60,7 +60,10 @@ const Index = () => {
       });
 
       window.addEventListener("lang_toggle", (event) => {
-        console.log("Analytics: Language changed", (event as CustomEvent).detail);
+        console.log(
+          "Analytics: Language changed",
+          (event as CustomEvent).detail,
+        );
       });
 
       window.addEventListener("download_pdf", (event) => {

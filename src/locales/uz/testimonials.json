@@ -1,4 +1,3 @@
-
 {
   "testimonials": {
     "title": "Mijozlarimiz nima deyishadi",
@@ -19,6 +18,11 @@
         "position": "Katta advokat, Huquqiy maslahatchilar"
       }
     ],
-    "clients": ["O'zbekiston Milliy Banki", "BMT DP O'zbekiston", "O'zbektelekom", "Adliya vazirligi"]
+    "clients": [
+      "O'zbekiston Milliy Banki",
+      "BMT DP O'zbekiston",
+      "O'zbektelekom",
+      "Adliya vazirligi"
+    ]
   }
 }

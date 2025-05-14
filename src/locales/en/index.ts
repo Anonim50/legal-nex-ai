@@ -41,7 +41,8 @@ const translations: Translation = {
     title: "What Our Users Say",
     items: [
       {
-        quote: "I used to spend hours reading contracts. Now it takes me one minute.",
+        quote:
+          "I used to spend hours reading contracts. Now it takes me one minute.",
         name: "Akhmadjon",
         role: "Entrepreneur",
       },

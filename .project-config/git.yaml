@@ -1,0 +1,6 @@
+git:
+  branch_naming: "feature/<short-description>" or "bugfix/<short-description>"
+  commit_messages: "Conventional Commits: feat:, fix:, chore:"
+  pull_requests:
+    - One logical change per PR
+    - Must describe what, why, and how to test

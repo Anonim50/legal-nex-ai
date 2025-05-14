@@ -1,8 +1,7 @@
-
-import { 
-  FileText, 
-  FileArchive, 
-  Settings, 
+import {
+  FileText,
+  FileArchive,
+  Settings,
   HelpCircle,
   ChevronLeft,
   ChevronRight,
@@ -22,14 +21,18 @@ export const DashboardSidebar = () => {
   ];
 
   return (
-    <div className={cn(
-      "bg-neutral-softGray border-r border-gray-200 transition-all duration-300",
-      collapsed ? "w-16" : "w-64"
-    )}>
+    <div
+      className={cn(
+        "bg-neutral-softGray border-r border-gray-200 transition-all duration-300",
+        collapsed ? "w-16" : "w-64",
+      )}
+    >
       <div className="flex flex-col h-full p-4">
         <div className="flex items-center justify-between mb-6">
           {!collapsed && (
-            <h2 className="text-lg font-bold text-neutral-darkPurple">Legal Nexus</h2>
+            <h2 className="text-lg font-bold text-neutral-darkPurple">
+              Legal Nexus
+            </h2>
           )}
           <Button
             variant="ghost"
@@ -40,7 +43,7 @@ export const DashboardSidebar = () => {
             {collapsed ? <ChevronRight size={16} /> : <ChevronLeft size={16} />}
           </Button>
         </div>
-        
+
         <nav className="space-y-1">
           {sidebarItems.map((item) => (
             <a
@@ -48,10 +51,10 @@ export const DashboardSidebar = () => {
               href={item.href}
               className={cn(
                 "flex items-center px-2 py-3 rounded-md transition-colors",
-                item.active 
-                  ? "bg-primary text-white" 
+                item.active
+                  ? "bg-primary text-white"
                   : "text-neutral-darkPurple hover:bg-gray-200",
-                collapsed ? "justify-center" : "justify-start"
+                collapsed ? "justify-center" : "justify-start",
               )}
             >
               <item.icon size={20} />

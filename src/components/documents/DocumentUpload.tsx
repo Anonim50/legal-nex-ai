@@ -5,15 +5,22 @@ import { Button } from "@/components/ui/button";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { Upload } from "lucide-react";
+import { User } from "@supabase/supabase-js";
+
+interface SupabaseError {
+  message: string;
+  status?: number;
+  details?: string;
+}
 
 export const DocumentUpload = () => {
   const [isUploading, setIsUploading] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
-  const [user, setUser] = useState<any>(null);
+  const [user, setUser] = useState<User | null>(null);
 
   /* ── актуальная сессия ─────────────────────────────────────────── */
   useEffect(() => {
-    supabase.auth.getSession().then(({ data }) => setUser(data.session?.user));
+    supabase.auth.getSession().then(({ data }) => setUser(data.session?.user ?? null));
   }, []);
 
   /* ── главный процесс загрузки ──────────────────────────────────── */
@@ -31,8 +38,7 @@ export const DocumentUpload = () => {
       const fileName = `${uuidv4()}.${fileExt}`;
       const filePath = `${fileName}`;
 
-      const { error: storageErr } = await supabase
-        .storage
+      const { error: storageErr } = await supabase.storage
         .from("legal_documents")
         .upload(filePath, file);
 
@@ -60,7 +66,9 @@ export const DocumentUpload = () => {
       reader.onload = async (e) => {
         const text = e.target?.result as string;
 
-        const { data: { session } } = await supabase.auth.getSession();
+        const {
+          data: { session },
+        } = await supabase.auth.getSession();
         const token = session?.access_token;
 
         const { error: funcErr } = await supabase.functions.invoke(
@@ -80,33 +88,40 @@ export const DocumentUpload = () => {
       };
 
       reader.readAsText(file);
-    } catch (err: any) {
-      console.error(err);
-      toast.error(err.message ?? "Upload error");
+    } catch (err: unknown) {
+      const error = err as SupabaseError;
+      console.error(error);
+      toast.error(error.message ?? "Upload error");
     } finally {
       setIsUploading(false);
     }
   };
 
-  /* ── helpers для drag’n’drop ───────────────────────────────────── */
-  const triggerInput = () =>
-    document.getElementById("file-upload")?.click();
+  /* ── helpers для drag'n'drop ───────────────────────────────────── */
+  const triggerInput = () => document.getElementById("file-upload")?.click();
 
   const onInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const f = e.target.files?.[0];
     if (f) handleUpload(f);
   };
   const onDragEnter = (e: React.DragEvent<HTMLDivElement>) => {
-    e.preventDefault(); e.stopPropagation(); setIsDragging(true);
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDragging(true);
   };
   const onDragLeave = (e: React.DragEvent<HTMLDivElement>) => {
-    e.preventDefault(); e.stopPropagation(); setIsDragging(false);
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDragging(false);
   };
   const onDragOver = (e: React.DragEvent<HTMLDivElement>) => {
-    e.preventDefault(); e.stopPropagation();
+    e.preventDefault();
+    e.stopPropagation();
   };
   const onDrop = (e: React.DragEvent<HTMLDivElement>) => {
-    e.preventDefault(); e.stopPropagation(); setIsDragging(false);
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDragging(false);
     const f = e.dataTransfer.files?.[0];
     if (f) handleUpload(f);
   };

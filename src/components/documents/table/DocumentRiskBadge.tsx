@@ -1,6 +1,10 @@
-
 import { Badge } from "@/components/ui/badge";
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 interface DocumentRiskBadgeProps {
   risk: string | null;
@@ -8,25 +12,31 @@ interface DocumentRiskBadgeProps {
 
 export const DocumentRiskBadge = ({ risk }: DocumentRiskBadgeProps) => {
   if (!risk) return null;
-  
-  const configs: Record<string, { variant: "default" | "destructive" | "outline" | "secondary", tooltip: string }> = {
+
+  const configs: Record<
+    string,
+    {
+      variant: "default" | "destructive" | "outline" | "secondary";
+      tooltip: string;
+    }
+  > = {
     high: {
-      variant: 'destructive',
-      tooltip: 'High risk - immediate attention required'
+      variant: "destructive",
+      tooltip: "High risk - immediate attention required",
     },
     medium: {
-      variant: 'secondary',
-      tooltip: 'Medium risk - review recommended'
+      variant: "secondary",
+      tooltip: "Medium risk - review recommended",
     },
     low: {
-      variant: 'outline',
-      tooltip: 'Low risk - standard review'
-    }
+      variant: "outline",
+      tooltip: "Low risk - standard review",
+    },
   };
-  
+
   const config = configs[risk] || {
-    variant: 'outline' as const,
-    tooltip: 'Risk level undefined'
+    variant: "outline" as const,
+    tooltip: "Risk level undefined",
   };
 
   return (

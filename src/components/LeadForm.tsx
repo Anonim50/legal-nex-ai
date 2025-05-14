@@ -1,4 +1,3 @@
-
 import React, { useState, useCallback } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -13,12 +12,20 @@ import { SubmitButton } from "./form/SubmitButton";
 import { formSchema, FormValues } from "./form/types";
 import { supabase } from "@/integrations/supabase/client";
 import { useNavigate } from "react-router-dom";
+import { FormSection } from "@/types/translations";
+
+interface SupabaseError {
+  message: string;
+  status?: number;
+  details?: string;
+}
 
 export const LeadForm: React.FC = () => {
   const { t } = useLanguage();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const navigate = useNavigate();
-  
+  const formTranslations = t<"form">('form') as FormSection;
+
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -32,50 +39,46 @@ export const LeadForm: React.FC = () => {
   // Memoize options to avoid unnecessary re-renders
   const roleOptions = useCallback(() => {
     return getTranslatedOptions(
-      t("form.fields.role.options"),
+      formTranslations.fields.role.options,
       "form.fields.role.options",
-      [{ value: "default", label: "Default Role", disabled: true }]
+      [{ value: "default", label: "Default Role", disabled: true }],
     );
-  }, [t]);
-  
+  }, [formTranslations]);
+
   const companySizeOptions = useCallback(() => {
     return getTranslatedOptions(
-      t("form.fields.company_size.options"),
-      "form.fields.company_size.options"
+      formTranslations.fields.company_size.options,
+      "form.fields.company_size.options",
     );
-  }, [t]);
-  
+  }, [formTranslations]);
+
   const languageOptions = useCallback(() => {
     return getTranslatedOptions(
-      t("form.fields.language.options"),
-      "form.fields.language.options"
+      formTranslations.fields.language.options,
+      "form.fields.language.options",
     );
-  }, [t]);
+  }, [formTranslations]);
 
   const onSubmit = async (data: FormValues) => {
     setIsSubmitting(true);
     window.dispatchEvent(new CustomEvent("form_submit", { detail: data }));
-    
+
     try {
-      // Store lead information in Supabase (implementation will come later)
-      // For now, show success message and redirect to auth page
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      toast.success(safeTranslation(t, "form.success", "Thank you! We'll be in touch soon."));
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+      toast.success(formTranslations.success);
       form.reset();
-      
-      // Navigate to sign up page with the email pre-filled
+
       setTimeout(() => {
-        navigate("/auth", { 
-          state: { 
+        navigate("/auth", {
+          state: {
             activeTab: "signup",
-            email: data.email
-          } 
+            email: data.email,
+          },
         });
       }, 1500);
-    } catch (error: any) {
-      toast.error(
-        error?.message || "An error occurred. Please try again."
-      );
+    } catch (error: unknown) {
+      const supabaseError = error as SupabaseError;
+      toast.error(supabaseError?.message || formTranslations.error);
     } finally {
       setIsSubmitting(false);
     }
@@ -87,7 +90,7 @@ export const LeadForm: React.FC = () => {
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
           <EmailField form={form} />
-          
+
           <SelectField
             form={form}
             name="role"
@@ -95,7 +98,7 @@ export const LeadForm: React.FC = () => {
             placeholder="Select your role"
             options={roleOptions()}
           />
-          
+
           <SelectField
             form={form}
             name="company_size"
@@ -103,7 +106,7 @@ export const LeadForm: React.FC = () => {
             placeholder="Select company size"
             options={companySizeOptions()}
           />
-          
+
           <SelectField
             form={form}
             name="language"
@@ -111,7 +114,7 @@ export const LeadForm: React.FC = () => {
             placeholder="Select language"
             options={languageOptions()}
           />
-          
+
           <SubmitButton isSubmitting={isSubmitting} />
         </form>
       </Form>

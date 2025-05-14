@@ -1,4 +1,3 @@
-
 import en from "@/locales/en/index";
 import ru from "@/locales/ru/index";
 import uz from "@/locales/uz/index";
@@ -15,13 +14,13 @@ function compareObjects(
   source: any,
   target: any,
   path: string = "",
-  results: ValidationResult
+  results: ValidationResult,
 ): void {
   // Handle arrays
   if (Array.isArray(source)) {
     if (!Array.isArray(target)) {
       results.structuralDifferences.push(
-        `${path}: Expected array but found ${typeof target}`
+        `${path}: Expected array but found ${typeof target}`,
       );
     }
     return;
@@ -31,7 +30,7 @@ function compareObjects(
   if (typeof source === "object" && source !== null) {
     if (typeof target !== "object" || target === null) {
       results.structuralDifferences.push(
-        `${path}: Expected object but found ${typeof target}`
+        `${path}: Expected object but found ${typeof target}`,
       );
       return;
     }
@@ -39,7 +38,7 @@ function compareObjects(
     // Check each key in source object
     for (const key in source) {
       const newPath = path ? `${path}.${key}` : key;
-      
+
       if (!(key in target)) {
         results.missingKeys.push(newPath);
       } else {
@@ -52,16 +51,18 @@ function compareObjects(
 /**
  * Validates translation object structure against a reference language (usually English)
  */
-export function validateTranslations(reference = "en"): Record<string, ValidationResult> {
+export function validateTranslations(
+  reference = "en",
+): Record<string, ValidationResult> {
   const referenceObj = reference === "en" ? en : reference === "ru" ? ru : uz;
   const results: Record<string, ValidationResult> = {};
 
   // Compare each language against reference
   for (const lang of ["en", "ru", "uz"]) {
     if (lang === reference) continue;
-    
+
     const targetObj = lang === "en" ? en : lang === "ru" ? ru : uz;
-    
+
     results[lang] = {
       missingKeys: [],
       structuralDifferences: [],
@@ -74,23 +75,29 @@ export function validateTranslations(reference = "en"): Record<string, Validatio
   if (process.env.NODE_ENV === "development") {
     console.group("Translation Validation Results");
     Object.entries(results).forEach(([lang, result]) => {
-      const hasIssues = result.missingKeys.length > 0 || result.structuralDifferences.length > 0;
-      
+      const hasIssues =
+        result.missingKeys.length > 0 ||
+        result.structuralDifferences.length > 0;
+
       if (hasIssues) {
         console.group(`Issues in ${lang} translations`);
-        
+
         if (result.missingKeys.length > 0) {
           console.group(`Missing keys (${result.missingKeys.length}):`);
-          result.missingKeys.forEach(key => console.log(`- ${key}`));
+          result.missingKeys.forEach((key) => console.log(`- ${key}`));
           console.groupEnd();
         }
-        
+
         if (result.structuralDifferences.length > 0) {
-          console.group(`Structural differences (${result.structuralDifferences.length}):`);
-          result.structuralDifferences.forEach(diff => console.log(`- ${diff}`));
+          console.group(
+            `Structural differences (${result.structuralDifferences.length}):`,
+          );
+          result.structuralDifferences.forEach((diff) =>
+            console.log(`- ${diff}`),
+          );
           console.groupEnd();
         }
-        
+
         console.groupEnd();
       } else {
         console.log(`✅ ${lang}: No issues found`);

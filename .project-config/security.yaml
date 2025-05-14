@@ -1,0 +1,4 @@
+security:
+  - Never commit secrets or real .env files
+  - Use .env.example for shared env vars
+  - All sensitive data should come from process.env

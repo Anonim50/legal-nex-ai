@@ -1,6 +1,10 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 import { Language, Region } from "@/types/language";
-import { Translation, TranslationPath, TranslationValue } from "@/types/translations";
+import {
+  Translation,
+  TranslationPath,
+  TranslationValue,
+} from "@/types/translations";
 import { detectBrowserLanguage } from "@/utils/languageDetection";
 import { useTranslation } from "@/hooks/useTranslation";
 import { useFormatting } from "@/hooks/useFormatting";
@@ -21,9 +25,13 @@ interface LanguageContextType {
   isLoading: boolean;
 }
 
-const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
+const LanguageContext = createContext<LanguageContextType | undefined>(
+  undefined,
+);
 
-export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({
+  children,
+}) => {
   const [language, setLanguageState] = useState<Language>("ru");
   const [region, setRegion] = useState<Region>("UZ");
   const [isLoading, setIsLoading] = useState(true);
@@ -32,7 +40,8 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     const storedLanguage = localStorage.getItem("language") as Language | null;
     const storedRegion = localStorage.getItem("region") as Region | null;
 
-    const { lang: detectedLang, region: detectedRegion } = detectBrowserLanguage();
+    const { lang: detectedLang, region: detectedRegion } =
+      detectBrowserLanguage();
     const initialLanguage = storedLanguage || detectedLang;
     const initialRegion = storedRegion || detectedRegion;
 
@@ -48,7 +57,9 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ chil
       localStorage.setItem("language", lang);
       setLanguageState(lang);
       document.documentElement.lang = lang;
-      window.dispatchEvent(new CustomEvent("lang_toggle", { detail: { language: lang } }));
+      window.dispatchEvent(
+        new CustomEvent("lang_toggle", { detail: { language: lang } }),
+      );
     } finally {
       setIsLoading(false);
     }
@@ -66,7 +77,7 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     region,
     formatPhone,
     formatDate,
-    isLoading
+    isLoading,
   };
 
   return (
